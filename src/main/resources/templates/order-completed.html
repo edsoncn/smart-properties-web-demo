@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Smart Shop - Order Completed</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+<div th:replace="index.html :: navbar"></div>
+<!-- Header-->
+<header class="bg-dark py-1">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Order <span th:text="${statusName}"></span></h1>
+            <h3 class="fw-normal text-white-50 mb-0"><span th:text="${orderTitle}"></span></h3>
+            <p class="lead fw-normal text-white-50 mb-0"><span th:text="${orderSubtitle}"></span></p>
+        </div>
+    </div>
+</header>
+<!-- Section-->
+<section class="py-5">
+    <div class="row px-3">
+        <div class="alert alert-warning lead fw-bold px-3" style="width: auto; margin: 0 auto" role="alert" th:if="${discountPercentage}" th:text="${'Because you deserve it. You got a ' + discountPercentage + '% of discount for your next order'}"></div>
+    </div>
+    <div id="page-wrapper" class="container px-3 px-lg-3 mt-3">
+        <div class="row">
+            <table class="table align-middle">
+                <thead>
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit Price</th>
+                    <th scope="col">Total Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><img src="/assets/prod02.png" class="img-thumbnail mx-1 my-1" alt="..." style="max-height: 120px"> Surface Pro 8</td>
+                    <td class="text-end">1</td>
+                    <td class="text-end" th:text="${'$' + #numbers.formatDecimal(totalProduct,0,'COMMA',2,'POINT')}"></td>
+                    <td class="text-end" th:text="${'$' + #numbers.formatDecimal(totalProduct,0,'COMMA',2,'POINT')}"></td>
+                </tr>
+                <tr>
+                    <td class="py-3">
+                        <strong>Shipping address:</strong><br/>
+                        <strong>Shipping date:</strong><br/>
+                        <strong>Payment method:</strong><br/>
+                        <strong th:if="${earnedCredits}">Earned credits:</strong>
+                    </td>
+                    <td colspan="3" class="py-3">
+                        Rue de Rivoli, 75001 Paris, France<br/>
+                        <span th:text="${#dates.format(shippingDate, 'dd/MM/yyyy')}"></span><br/>
+                        <span th:text="${paymentMethodMap.get(paymentMethod)}"></span><br/>
+                        <span th:if="${earnedCredits}" th:text="${earnedCredits} + ' credits'"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="row py-3">
+                            <div class="col-12 text-end">
+                                Total Product:<br/>
+                                Shipping Cost:
+                            </div>
+                        </div></td>
+                    <td colspan="2">
+                        <div class="row py-3">
+                            <div class="col-12 text-end">
+                                <span th:text="${'$' + #numbers.formatDecimal(totalProduct,0,'COMMA',2,'POINT')}"></span><br/>
+                                <span th:text="${'$' + #numbers.formatDecimal(shippingCost,0,'COMMA',2,'POINT')}"></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="row py-3">
+                            <div class="col-12 text-end">
+                                <strong>Total Amount:</strong>
+                            </div>
+                        </div>
+                    </td>
+                    <td colspan="2">
+                        <div class="row py-3">
+                            <div class="col-12 text-end">
+                                <strong><span th:text="${'$' + #numbers.formatDecimal(totalAmount,0,'COMMA',2,'POINT')}"></span></strong>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<div th:replace="index.html :: footer"></div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Smart Shop - Checkout</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+<div th:replace="index.html :: navbar"></div>
+<!-- Header-->
+<header class="bg-dark py-1">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Checkout</h1>
+        </div>
+    </div>
+</header>
+<!-- Section-->
+<section class="py-5">
+    <div id="page-wrapper" class="container px-3 px-lg-3 mt-3">
+        <div class="row">
+            <div class="col-md-8 mb-5">
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                                <strong>Shipping Address</strong>
+                            </button>
+                        </h2>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                <strong>Shipping Date</strong>
+                            </button>
+                        </h2>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
+                                <strong>Payment Method</strong>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+                            <div class="accordion-body">
+                                <div class="card">
+                                    <div class="card-header"><strong>Select you payment method: </strong></div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item" th:if="${#lists.contains(paymentMethods, 'smartShopCredit')}">
+                                            <div class="d-inline-block float-start py-1" th:text="${paymentMethodMap['smartShopCredit']}"></div>
+                                            <img class="d-inline-block float-end payment-method-icon clearfix" src="/assets/paymethod-smartprod-card.png" />
+                                        </li>
+                                        <li class="list-group-item" th:if="${#lists.contains(paymentMethods, 'creditCard')}">
+                                            <div class="d-inline-block float-start py-1" th:text="${paymentMethodMap['creditCard']}"></div>
+                                            <img class="d-inline-block float-end payment-method-icon clearfix" src="/assets/paymethod-credit-card.png" />
+                                        </li>
+                                        <li class="list-group-item" th:if="${#lists.contains(paymentMethods, 'paypal')}">
+                                            <div class="d-inline-block float-start py-1" th:text="${paymentMethodMap['paypal']}"></div>
+                                            <img class="d-inline-block float-end payment-method-icon clearfix" src="/assets/paymethod-paypal.png" />
+                                        </li>
+                                        <li class="list-group-item" th:if="${#lists.contains(paymentMethods, 'payWithLink')}">
+                                            <div class="d-inline-block float-start py-1" th:text="${paymentMethodMap['payWithLink']}"></div>
+                                            <img class="d-inline-block float-end payment-method-icon clearfix" src="/assets/paybylink_com.svg" />
+                                        </li>
+                                        <li class="list-group-item" th:if="${#lists.contains(paymentMethods, 'billMeLater')}">
+                                            <div class="d-inline-block float-start py-1" th:text="${paymentMethodMap['billMeLater']}"></div>
+                                            <img class="d-inline-block float-end payment-method-icon clearfix" src="/assets/bill-me-later.png" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">My Cart</h5>
+                        <div class="row">
+                            <div class="col-4 px-1 align-middle">
+                                <img src="/assets/prod02.png" class="img-thumbnail" alt="...">
+                            </div>
+                            <div class="col-4 px-1 align-middle d-flex align-items-center">
+                                Surface Pro 8<br/>x1
+                            </div>
+                            <div class="col-4 px-1 align-middle d-flex align-items-center">
+                                <div class="container px-0 text-end">
+                                    <span th:text="${'$' + #numbers.formatDecimal(totalProduct,0,'COMMA',2,'POINT')}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row px-3 py-3">
+                    <div class="col-6 text-end">
+                        Total Product:<br/>
+                        Shipping Cost:<br/>
+                        <strong>Total Amount:</strong>
+                    </div>
+                    <div class="col-6 text-end">
+                        <span th:text="${'$' + #numbers.formatDecimal(totalProduct,0,'COMMA',2,'POINT')}"></span><br/>
+                        <span th:text="${'$' + #numbers.formatDecimal(shippingCost,0,'COMMA',2,'POINT')}"></span><br/>
+                        <strong><span th:text="${'$' + #numbers.formatDecimal(totalAmount,0,'COMMA',2,'POINT')}"></span></strong>
+                    </div>
+                    <div class="col-12 text-end py-4">
+                        <form action="/order-completed" method="GET">
+                            <button type="submit" class="btn btn-success btn-lg">Checkout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="index.html :: footer"></div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
+</body>
+</html>
+</body>
+</html>
