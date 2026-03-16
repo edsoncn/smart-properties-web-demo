@@ -1,7 +1,7 @@
 # Smart Properties Web Demo
 
-Smart Properties Web Demo is demo web page that simulates a E-Commnerce store, for the tenant Ripley PE, implemented in Java with Spring Boot + Thymeleaf.
+Smart Properties Web Demo is a sample web application that simulates an e-commerce store for the Ripley PE tenant. The application is implemented in Java using Spring Boot and Thymeleaf.
 
-It implements the integration with Smart Propeties SaaS using the Smart Properties Java SDK to complie the Smart Properties precompiled JSON code in runtime.
+The project demonstrates the integration with Smart Properties SaaS through the Smart Properties Java SDK, which compiles the precompiled Smart Properties JSON code at runtime.
 
-Also expose and endpoint for the syncronization with the Smart Properties Web when there is a deploy of new Smart Properties or updates
+Additionally, the application exposes an endpoint that enables synchronization with Smart Properties Web whenever new Smart Properties are deployed or existing ones are updated.
